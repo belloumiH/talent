@@ -1,0 +1,28 @@
+# grumphp.yml
+parameters:
+    git_dir: .
+    bin_dir: vendor/bin
+    ascii:
+        failed: ~
+        succeeded: ~
+    tasks:
+        phplint:
+            exclude: [vendor]
+            jobs: ~
+            short_open_tag: false
+            ignore_patterns: [vendor]
+            triggered_by: ['php']
+        git_blacklist:
+            keywords:
+                - "die("
+                - "die;"
+                - "echo("
+                - "print("
+                - "print_r("
+                - "var_dump("
+                - "dump("
+                - "exit;"
+            whitelist_patterns:
+                - /^src\/(.*)/
+            triggered_by: ['php']
+        phpcsfixer: ~
