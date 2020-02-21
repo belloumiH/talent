@@ -1,3 +1,23 @@
-#index:
-#    path: /
-#    controller: App\Controller\DefaultController::index
+default.index:
+  path: /
+  controller: App\Controller\FrontController::index
+  defaults:
+    languageUser : 'fr'
+
+index:
+  path: /{languageUser}
+  controller: App\Controller\FrontController::index
+  requirements:
+    languageUser:  fr|en|ar
+
+offer.information:
+  path: /{languageUser}/offer/{offerId}
+  controller: App\Controller\FrontController::offer
+  requirements:
+    languageUser:  fr|en|ar
+
+offer.information.default:
+  path: /offer/{offerId}
+  controller: App\Controller\FrontController::offer
+  defaults:
+    languageUser : 'fr'
