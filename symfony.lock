@@ -1,4 +1,10 @@
 {
+    "composer/semver": {
+        "version": "1.5.1"
+    },
+    "composer/xdebug-handler": {
+        "version": "1.4.0"
+    },
     "doctrine/annotations": {
         "version": "1.0",
         "recipe": {
@@ -90,6 +96,36 @@
     "egulias/email-validator": {
         "version": "2.1.17"
     },
+    "friendsofphp/php-cs-fixer": {
+        "version": "2.2",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "master",
+            "version": "2.2",
+            "ref": "cc05ab6abf6894bddb9bbd6a252459010ebe040b"
+        },
+        "files": [
+            ".php_cs.dist"
+        ]
+    },
+    "friendsofsymfony/jsrouting-bundle": {
+        "version": "2.3",
+        "recipe": {
+            "repo": "github.com/symfony/recipes-contrib",
+            "branch": "master",
+            "version": "2.3",
+            "ref": "a9f2e49180f75cdc71ae279a929c4b2e0638de84"
+        },
+        "files": [
+            "config/routes/fos_js_routing.yaml"
+        ]
+    },
+    "gitonomy/gitlib": {
+        "version": "v1.2.0"
+    },
+    "jakub-onderka/php-parallel-lint": {
+        "version": "v1.0.0"
+    },
     "jdorn/sql-formatter": {
         "version": "v1.2.17"
     },
@@ -115,7 +151,10 @@
         "version": "2.7.0"
     },
     "php": {
-        "version": "7.4"
+        "version": "7.2"
+    },
+    "php-cs-fixer/diff": {
+        "version": "v1.3.0"
     },
     "phpdocumentor/reflection-common": {
         "version": "2.0.0"
@@ -125,6 +164,9 @@
     },
     "phpdocumentor/type-resolver": {
         "version": "1.0.1"
+    },
+    "phpro/grumphp": {
+        "version": "v0.17.2"
     },
     "psr/cache": {
         "version": "1.0.1"
@@ -137,6 +179,9 @@
     },
     "psr/log": {
         "version": "1.1.2"
+    },
+    "seld/jsonlint": {
+        "version": "1.7.2"
     },
     "sensio/framework-extra-bundle": {
         "version": "5.2",
@@ -511,5 +556,14 @@
     },
     "webmozart/assert": {
         "version": "1.7.0"
+    },
+    "willdurand/jsonp-callback-validator": {
+        "version": "v1.1.0"
+    },
+    "zendframework/zend-code": {
+        "version": "3.4.1"
+    },
+    "zendframework/zend-eventmanager": {
+        "version": "3.2.1"
     }
 }

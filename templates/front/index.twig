@@ -1,0 +1,62 @@
+{% extends 'front/base.twig' %}
+
+{% block content %}
+<section class="page_title cs gradientvertical-background s-py-25">
+				<div class="container">
+					<div class="row">
+
+						<div class="divider-50"></div>
+
+						<div class="col-md-12 text-center">
+							<h1 class="">Services</h1>
+							<ol class="breadcrumb">
+								<li class="breadcrumb-item">
+									<a href="#">Home</a>
+								</li>
+
+								<li class="breadcrumb-item active">
+									Services
+								</li>
+							</ol>
+						</div>
+
+						<div class="divider-50"></div>
+
+					</div>
+				</div>
+			</section>
+
+
+			<section class="ls s-pt-100 s-py-75 c-gutter-50 c-mb-50 services1">
+				<div class="container px-30">
+					<div class="row">
+
+						<div class="d-none d-lg-block divider-80"></div>
+                        {% for offer in offers %}
+						<div class="col-md-6 col-lg-4">
+
+							<div class="vertical-item text-center item-content">
+								<div class="item-media">
+									<img src="{{ asset('assets/front/images/services/service01.jpg') }}" alt="">
+									<div class="media-links">
+										<a class="link" title="" href="{{ path('offer.information',{'offerId' : offer.id, 'languageUser' : languageUser }) }}"></a>
+									</div>
+								</div>
+								<div class="item-content box services">
+									<h4>
+										<a href="{{ path('offer.information',{'offerId' : offer.id, 'languageUser' : languageUser }) }}">{{ offer.title }}</a>
+									</h4>
+
+									<p>
+										{{ offer.description }}
+									</p>
+
+								</div>
+							</div>
+						</div>
+                        {% endfor %}
+						<div class="d-none d-lg-block divider-30"></div>
+					</div>
+				</div>
+			</section>
+{% endblock %}

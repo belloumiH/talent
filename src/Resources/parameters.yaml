@@ -1,0 +1,3 @@
+parameters:
+  uploads_public_directory: '%kernel.project_dir%/public/uploads'
+  uploads_private_directory: '%kernel.project_dir%/uploads'

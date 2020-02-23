@@ -21,3 +21,7 @@ offer.information.default:
   controller: App\Controller\FrontController::offer
   defaults:
     languageUser : 'fr'
+
+candidate.insert:
+  path: /candidate-insert/{languageUser}
+  controller: App\Controller\FrontController::candidateInsert    

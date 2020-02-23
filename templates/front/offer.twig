@@ -1,0 +1,154 @@
+{% extends 'front/base.twig' %}
+{% block content %}
+
+        <section class="ls s-py-50 c-mb-30">
+                <div class="container">
+                    <div class="row">
+
+                        
+                        <div class="col-12 c-gutter-50">
+                            <div class="row ">
+                                
+                                <div class="col-lg-12 col-lg-offset-1">
+
+                                    <p>
+                                        {{ offers.title }}
+                                    </p>
+
+                                    <p>
+                                       {{ offers.description }}
+
+                                    </p>
+
+                                    <ul class="list-styled">
+                                        {% for onepost in offers.post %}
+                                        <li>
+                                       {{onepost.label}}
+                                        </li>
+                                        {% endfor %}
+                                        
+                                    </ul>
+
+
+                                    <!-- tabs start -->
+                                    <ul class="nav nav-tabs mt-4 " role="tablist">
+                                        
+                                        <li class="nav-item">
+                                            <a class="nav-link" id="tab02" data-toggle="tab" href="#tab02_pane" role="tab" aria-controls="tab02_pane">Skills</a>
+                                        </li>
+                                        
+                                    </ul>
+                                   
+
+                                        <div class="pt-50 pb-60 tab-pane fade" id="tab02_pane" role="tabpanel" aria-labelledby="tab02">
+                                            {% for skill in offers.skills %} 
+                                            <div class="progress-title">
+                                                <p>
+                                                   {{skill.label}}
+                                                </p>
+                                                <span class="float-right">100%</span>
+                                            </div>
+                                            <div class="progress">
+                                                <div class="progress-bar bg-maincolor2" role="progressbar" data-transitiongoal="100" aria-valuemin="0" aria-valuemax="100">
+                                                </div>
+                                            </div>
+                                            {% endfor %}
+                                         
+                                        </div>
+                                        
+                                        </div>
+
+                                    </div>
+                                    <!-- tabs end-->
+                                   
+                                </div>
+                            </div>
+                        </div>
+
+                        
+
+                    </div>
+                </div>
+            </section>
+    <section class="pt-20 pb-30 s-py-md-75 s-py-lg-130 candidate-page">
+        <div class="container" style="padding-top : 0 !important;">
+            <div class="row">
+                <div class=" col-sm-12 contact-header text-center animate" data-animation="pullDown">
+                    <h5>
+                        Submit
+                    </h5>
+                    <h4>
+                        Candidate CV
+                    </h4>
+                </div>
+                <form class="contact-form contact2 c-mb-20 animate" id="contact-form-postulate" data-animation="pullUp" method="post"
+                      action="{{ path('candidate.insert', {'languageUser' : languageUser}) }}" enctype="multipart/form-data">
+                    <input type="hidden" value="{{ offers.id }}" name="offer-id">
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-6">
+                            <div class="col-c-mb-60 form-group has-placeholder">
+                                <label for="name">Last Name
+                                    <span class="required">*</span>
+                                </label>
+                                <input type="text" aria-required="true" size="200" value="" name="your-name"
+                                       id="name" class="form-control" placeholder="Last Name">
+                            </div>
+                            <div class="col-c-mb-60 form-group has-placeholder">
+                                <label for="name">First Name
+                                    <span class="required">*</span>
+                                </label>
+                                <input type="text" aria-required="true" size="200" value="" name="your-first-name"
+                                       id="name" class="form-control" placeholder="First Name">
+                            </div>
+                            <div class="col-c-mb-60 form-group has-placeholder">
+                                <label for="text">Phone number
+                                    <span class="required">*</span>
+                                </label>
+                                <input type="text" aria-required="true" size="200" value="" name="phone"
+                                       id="text" class="form-control" placeholder="Phone number">
+                            </div>
+                            <div class="col-c-mb-60 form-group has-placeholder">
+                                <label for="email">Email address
+                                    <span class="required">*</span>
+                                </label>
+                                <input type="email" aria-required="true" size="200" value=""
+                                       name="your-email" id="email" class="form-control"
+                                       placeholder="Email address">
+                            </div>
+{#                            <div class="col-c-mb-60 form-group has-placeholder">#}
+{#                                <label for="text">Job sector#}
+{#                                    <span class="required">*</span>#}
+{#                                </label>#}
+{#                                <input type="text" aria-required="true" size="200" value="" name="text"#}
+{#                                       id="text" class="form-control" placeholder="Job sector">#}
+{#                            </div>#}
+                            <div class="col-c-mb-60 form-group">
+                                <input type="file" class="custom-file-input button"
+                                       id="validatedCustomFilePostulate" accept=".pdf, .doc, .docx" name="candidate-file">
+                                <label class="custom-file-label" id="validatedCustomFilePostulateLabel" for="validatedCustomFilePostulate">Attach CV</label>
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-sm-6">
+                            <div class="form-group has-placeholder">
+                                <label for="message">comments</label>
+                                <textarea aria-required="true" rows="6" cols="40" name="message"
+                                          id="message" class="form-control"
+                                          placeholder="comments"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mt-1">
+                        <div class="col-sm-12">
+                            <div class="form-group text-center">
+                                {#<input type="submit" class="btn theme_button" value="Submit CV">#}
+                                <button type="submit" id="contact_form_submit" name="contact_submit"
+                                        class="btn theme_button">Submit CV
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+{% endblock %}
