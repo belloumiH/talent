@@ -1,20 +1,39 @@
-{% extends 'base.html.twig' %}
-
-{% block title %}Hello FrontController!{% endblock %}
-
-{% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
-
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
-
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ '/var/www/html/talent/src/Controller/FrontController.php'|file_link(0) }}">src/Controller/FrontController.php</a></code></li>
-        <li>Your template at <code><a href="{{ '/var/www/html/talent/templates/front/error.html.twig'|file_link(0) }}">templates/front/error.html.twig</a></code></li>
-    </ul>
-</div>
+{% extends 'front/base.twig' %}
+{% block content %}
+    <section class="s-pt-75 s-pb-100 error-404 not-found page_404">
+        <div class="container">
+            <div class="row">
+                <div class="d-none d-lg-block divider-60"></div>
+                <div class="col-sm-12 text-center">
+                    <header class="page-header highlight">
+                        <h3>404</h3>
+                        <p class="text-uppercase">
+                            Oops, page not found!
+                        </p>
+                        <h6>
+                            Click to go home page:
+                        </h6>
+                    </header>
+                    <!-- .page-header -->
+                    <div class="page-content">
+                        <div id="search-404" class="widget widget_search">
+                            {#                            <form role="search" method="get" class="search-form" action="http://webdesign-finder.com/">#}
+                            {#                                <label for="search-form-404">#}
+                            {#                                    <span class="screen-reader-text">Search for:</span>#}
+                            {#                                </label>#}
+                            {#                                <input type="search" id="search-form-404" class="search-field" placeholder="Search keyword" value="" name="search ">#}
+                            {#                                <h6 class="page-header py-30">#}
+                            {#                                    or#}
+                            {#                                </h6>#}
+                            <p>
+                                <a href="{{ path('default.index') }}" class="btn btn-outline-darkgrey">Homepage</a>
+                            </p>
+                            {#                            </form>#}
+                        </div>
+                    </div>
+                    <!-- .page-content -->
+                </div>
+            </div>
+        </div>
+    </section>
 {% endblock %}
