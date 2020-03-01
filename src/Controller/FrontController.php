@@ -81,7 +81,7 @@ class FrontController extends AbstractController
         return $this->redirectToRoute('index', ['languageUser' => $languageUser]);
     }
 
-    public function error(Request $request, string $languageUser)
+    public function error(Request $request)
     {
         return $this->render('front/error.twig', [
             'controller_name' => 'FrontController',

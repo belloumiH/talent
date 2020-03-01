@@ -24,12 +24,6 @@
 	<link rel="stylesheet" href="{{ asset('assets/front/css/main.css') }}" class="color-switcher-link">
 	<script src="{{ asset('assets/front/js/vendor/modernizr-2.6.2.min.js') }}"></script>
 
-	<!--[if lt IE 9]>
-		<script src="{{ asset('assets/front/js/vendor/html5shiv.min.js') }}"></script>
-		<script src="{{ asset('assets/front/js/vendor/respond.min.js') }}"></script>
-		<script src="{{ asset('assets/front/js/vendor/jquery-1.12.4.min.js') }}"></script>
-	<![endif]-->
-
 </head>
 
 <body>
@@ -51,7 +45,6 @@
 				<div class="form-group">
 					<input type="text" value="" name="search" class="form-control" placeholder="Search keyword" id="modal-search-input">
 				</div>
-				<button type="submit" class="btn">Search</button>
 			</form>
 		</div>
 	</div>
@@ -134,7 +127,7 @@
 								<nav class="top-nav">
 									<ul class="nav sf-menu">
 										<li class="active">
-											<a href="#">Homepage</a>
+											<a href="{{ path('default.index') }}">Homepage</a>
 										</li>
 									</ul>
 
