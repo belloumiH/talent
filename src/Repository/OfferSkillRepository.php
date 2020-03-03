@@ -12,4 +12,16 @@ namespace App\Repository;
  */
 class OfferSkillRepository extends \Doctrine\ORM\EntityRepository
 {
+    public function getDistinctSkills()
+    {
+        $qb = $this->createQueryBuilder('s');
+
+        return $qb->select('s.label')
+            ->distinct()
+            ->innerJoin('App\Entity\Offer', 'o', 'WITH', 'o.id = s.offer')
+            ->where('o.enabled = :enabledValue')
+            ->setParameter('enabledValue', 1)
+            ->getQuery()
+            ->getResult();
+    }
 }

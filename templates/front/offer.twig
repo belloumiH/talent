@@ -1,75 +1,55 @@
 {% extends 'front/base.twig' %}
 {% block content %}
+    <section class="ls s-py-30 ">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 c-gutter-50">
+                    <div class="row ">
+                        <div class="col-lg-12 col-lg-offset-1">
+                            <p>
+                                {{ offers.title }}
+                            </p>
+                            <p>
+                                {{ offers.description }}
+                            </p>
+                            <ul class="list-styled">
+                                {% for onepost in offers.post %}
+                                    <li>
+                                        {{ onepost.label }}
+                                    </li>
+                                {% endfor %}
+                            </ul>
+                            <!-- tabs start -->
+                            <ul class="nav nav-tabs mt-4 " role="tablist">
 
-        <section class="ls s-py-30 ">
-                <div class="container">
-                    <div class="row">
-
-                        
-                        <div class="col-12 c-gutter-50">
-                            <div class="row ">
-                                
-                                <div class="col-lg-12 col-lg-offset-1">
-
-                                    <p>
-                                        {{ offers.title }}
-                                    </p>
-
-                                    <p>
-                                       {{ offers.description }}
-
-                                    </p>
-
-                                    <ul class="list-styled">
-                                        {% for onepost in offers.post %}
-                                        <li>
-                                       {{onepost.label}}
-                                        </li>
-                                        {% endfor %}
-                                        
-                                    </ul>
-
-
-                                    <!-- tabs start -->
-                                    <ul class="nav nav-tabs mt-4 " role="tablist">
-                                        
-                                        <li class="nav-item">
-                                            <a class="nav-link" id="tab02" data-toggle="tab" href="#tab02_pane" role="tab" aria-controls="tab02_pane"><h3>Skills</h3></a>
-                                        </li>
-                                        
-                                    </ul>
-                                   
-
-                                        <div class="pt-50 pb-60 tab-pane fade" id="tab02_pane" role="tabpanel" aria-labelledby="tab02">
-                                            {% for skill in offers.skills %} 
-                                            <div class="progress-title">
-                                                <p>
-                                                   {{skill.label}}
-                                                </p>
-                                                <span class="float-right"></span>
-                                            </div>
-                                            <div class="progress">
-                                                <div class="progress-bar bg-maincolor2" role="progressbar" data-transitiongoal="100" aria-valuemin="0" aria-valuemax="100">
-                                                </div>
-                                            </div>
-                                            {% endfor %}
-                                         
-                                        </div>
-                                        
-                                        </div>
-
+                                <li class="nav-item">
+                                    <a class="nav-link" id="tab02" data-toggle="tab" href="#tab02_pane" role="tab"
+                                       aria-controls="tab02_pane"><h3>Skills</h3></a>
+                                </li>
+                            </ul>
+                            <div class="pt-50 pb-60 tab-pane fade" id="tab02_pane" role="tabpanel"
+                                 aria-labelledby="tab02">
+                                {% for skill in offers.skills %}
+                                    <div class="progress-title">
+                                        <p>
+                                            {{ skill.label }}
+                                        </p>
+                                        <span class="float-right"></span>
                                     </div>
-                                    <!-- tabs end-->
-                                   
-                                </div>
+                                    <div class="progress">
+                                        <div class="progress-bar bg-maincolor2" role="progressbar"
+                                             data-transitiongoal="100" aria-valuemin="0" aria-valuemax="100">
+                                        </div>
+                                    </div>
+                                {% endfor %}
                             </div>
                         </div>
-
-                        
-
                     </div>
+                    <!-- tabs end-->
                 </div>
-            </section>
+            </div>
+        </div>
+    </section>
     <section class="pt-20 pb-30 s-py-md-75 s-py-lg-130 candidate-page">
         <div class="container" style="padding-top : 0 !important;">
             <div class="row">
@@ -81,8 +61,10 @@
                         Candidate CV
                     </h4>
                 </div>
-                <form class="contact-form contact2 c-mb-20 animate" id="contact-form-postulate" data-animation="pullUp" method="post"
-                      action="{{ path('candidate.insert', {'languageUser' : languageUser}) }}" enctype="multipart/form-data">
+                <form class="contact-form contact2 c-mb-20 animate" id="contact-form-postulate" data-animation="pullUp"
+                      method="post"
+                      action="{{ path('candidate.insert', {'languageUser' : languageUser}) }}"
+                      enctype="multipart/form-data">
                     <input type="hidden" value="{{ offers.id }}" name="offer-id">
                     <div class="row">
                         <div class="col-xs-12 col-sm-6">
@@ -115,17 +97,19 @@
                                        name="your-email" id="email" class="form-control"
                                        placeholder="Email address">
                             </div>
-{#                            <div class="col-c-mb-60 form-group has-placeholder">#}
-{#                                <label for="text">Job sector#}
-{#                                    <span class="required">*</span>#}
-{#                                </label>#}
-{#                                <input type="text" aria-required="true" size="200" value="" name="text"#}
-{#                                       id="text" class="form-control" placeholder="Job sector">#}
-{#                            </div>#}
+                            {#                            <div class="col-c-mb-60 form-group has-placeholder">#}
+                            {#                                <label for="text">Job sector#}
+                            {#                                    <span class="required">*</span>#}
+                            {#                                </label>#}
+                            {#                                <input type="text" aria-required="true" size="200" value="" name="text"#}
+                            {#                                       id="text" class="form-control" placeholder="Job sector">#}
+                            {#                            </div>#}
                             <div class="col-c-mb-60 form-group">
                                 <input type="file" class="custom-file-input button"
-                                       id="validatedCustomFilePostulate" accept=".pdf, .doc, .docx" name="candidate-file">
-                                <label class="custom-file-label" id="validatedCustomFilePostulateLabel" for="validatedCustomFilePostulate">Attach CV</label>
+                                       id="validatedCustomFilePostulate" accept=".pdf, .doc, .docx"
+                                       name="candidate-file">
+                                <label class="custom-file-label" id="validatedCustomFilePostulateLabel"
+                                       for="validatedCustomFilePostulate">Attach CV</label>
                             </div>
                         </div>
                         <div class="col-xs-12 col-sm-6">

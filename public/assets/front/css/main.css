@@ -8124,9 +8124,9 @@ select,
 	color: rgba(255, 255, 255, 0.6);
 }
 
-.cs a:not(.btn) {
-	color: #fff;
-}
+/*.cs a:not(.btn) {*/
+/*	color: #fff;*/
+/*}*/
 
 .cs a:not(.btn):hover {
 	opacity: 0.8;
