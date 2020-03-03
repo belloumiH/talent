@@ -15,4 +15,4 @@ framework:
     php_errors:
         log: true
     # Haythem Oussema code , overwride error controller
-    error_controller: App\Controller\FrontController::error
+#    error_controller: App\Controller\FrontController::error

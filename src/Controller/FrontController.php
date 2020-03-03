@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Candidate;
 use App\Entity\Offer;
+use App\Entity\OfferSkill;
 use Exception;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -11,24 +12,62 @@ use Symfony\Component\Yaml\Yaml;
 
 class FrontController extends AbstractController
 {
+    /**
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
     public function index(Request $request, string $languageUser)
     {
+        $pagingIndex = $this->getParameter('paging_index');
+        $orderBy = 1;
+        $address = [];
+        $skillsChoice = [];
+        $addressChoice = '';
         try {
-            $offers = $this->getDoctrine()
+            if ($request->isMethod('post')) {
+                $data = $request->request->all();
+                if (true === isset($data['address-filter'])) {
+                    $addressChoice = $data['address-filter'];
+                }
+                if (2 === (int) $data['time-filter']) {
+                    $orderBy = 2;
+                }
+                if (true === isset($data['skill-filter']) and 0 < count($data['skill-filter'])) {
+                    $skillsChoice = $data['skill-filter'];
+                }
+
+                $offers = $this->getDoctrine()
+                    ->getRepository(Offer::class)
+                    ->getByFilter($data, $pagingIndex);
+            } else {
+                $offers = $this->getDoctrine()
                 ->getRepository(Offer::class)
-                ->findBy(['enabled' => 1]);
+                ->findBy(['enabled' => 1], ['createdAt' => 'DESC'], $pagingIndex);
+            }
+            $address = $this->getDoctrine()
+            ->getRepository(Offer::class)
+            ->getDistinctAddress();
+            $skills = $this->getDoctrine()
+            ->getRepository(OfferSkill::class)
+            ->getDistinctSkills();
         } catch (Exception $e) {
             $offers = [];
+            $address = [];
+            $skills = [];
         }
+
         $translations = Yaml::parseFile(
             $this->getParameter('kernel.project_dir').'/translations/translation_'.$languageUser.'.yaml'
         );
 
         return $this->render('front/index.twig', [
-            'controller_name' => 'FrontController',
             'languageUser' => $languageUser,
             'translations' => $translations,
             'offers' => $offers,
+            'orderBy' => $orderBy,
+            'address' => $address,
+            'skills' => $skills,
+            'addressChoice' => $addressChoice,
+            'skillsChoice' => $skillsChoice,
         ]);
     }
 

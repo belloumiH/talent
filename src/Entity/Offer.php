@@ -6,6 +6,7 @@ namespace App\Entity;
 
 use App\Traits\EntityEnableTrait;
 use App\Traits\EntityIdTrait;
+use App\Traits\EntityTimestamp;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
@@ -20,6 +21,7 @@ class Offer
 {
     use EntityIdTrait;
     use EntityEnableTrait;
+    use EntityTimestamp;
 
     /**
      * @var string|null
