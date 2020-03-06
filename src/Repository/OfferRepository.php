@@ -24,7 +24,7 @@ class OfferRepository extends \Doctrine\ORM\EntityRepository
             ->getResult();
     }
 
-    public function getByFilter($data, $limit)
+    public function getByFilter($data, $limit = 0)
     {
         $qb = $this->createQueryBuilder('o');
         $qb->select()
@@ -46,9 +46,10 @@ class OfferRepository extends \Doctrine\ORM\EntityRepository
             $qb->orderBy('o.createdAt', 'DESC');
         }
         $qb->setFirstResult(0);
-        $qb->setMaxResults($limit);
+        if ($limit > 0) {
+            $qb->setMaxResults($limit);
+        }
 
-        return $qb->getQuery()
-            ->getResult();
+        return $qb->getQuery()->getResult();
     }
 }

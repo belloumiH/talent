@@ -8,6 +8,8 @@ use App\Entity\OfferSkill;
 use Exception;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Serializer\Serializer;
 use Symfony\Component\Yaml\Yaml;
 
 class FrontController extends AbstractController
@@ -37,18 +39,23 @@ class FrontController extends AbstractController
 
                 $offers = $this->getDoctrine()
                     ->getRepository(Offer::class)
-                    ->getByFilter($data, $pagingIndex);
+                    ->getByFilter($data);
+//                $offers = $paginator->paginate(
+//                    $query,
+//                    $request->query->getInt('page', 1),
+//                    $pagingIndex
+//                );
             } else {
                 $offers = $this->getDoctrine()
-                ->getRepository(Offer::class)
-                ->findBy(['enabled' => 1], ['createdAt' => 'DESC'], $pagingIndex);
+                    ->getRepository(Offer::class)
+                    ->findBy(['enabled' => 1], ['createdAt' => 'DESC']);
             }
             $address = $this->getDoctrine()
-            ->getRepository(Offer::class)
-            ->getDistinctAddress();
+                ->getRepository(Offer::class)
+                ->getDistinctAddress();
             $skills = $this->getDoctrine()
-            ->getRepository(OfferSkill::class)
-            ->getDistinctSkills();
+                ->getRepository(OfferSkill::class)
+                ->getDistinctSkills();
         } catch (Exception $e) {
             $offers = [];
             $address = [];
@@ -59,6 +66,9 @@ class FrontController extends AbstractController
             $this->getParameter('kernel.project_dir').'/translations/translation_'.$languageUser.'.yaml'
         );
 
+        $numberPage = (int) ceil(count($offers) / $pagingIndex);
+        $offers = array_slice($offers, 0, $pagingIndex);
+
         return $this->render('front/index.twig', [
             'languageUser' => $languageUser,
             'translations' => $translations,
@@ -68,6 +78,7 @@ class FrontController extends AbstractController
             'skills' => $skills,
             'addressChoice' => $addressChoice,
             'skillsChoice' => $skillsChoice,
+            'numberPage' => $numberPage,
         ]);
     }
 
@@ -134,5 +145,40 @@ class FrontController extends AbstractController
         $entityManager->flush();
 
         return $object;
+    }
+
+    public function getAjaxOffer(Request $request)
+    {
+        $pagingIndex = $this->getParameter('paging_index');
+        $orderBy = 1;
+        $address = [];
+        $skillsChoice = [];
+        $addressChoice = '';
+        try {
+            if ($request->isMethod('post')) {
+                $data = $request->request->all();
+                if (2 === (int) $data['time-filter']) {
+                    $orderBy = 2;
+                }
+                if (true === isset($data['skill-filter']) and '' != $data['skill-filter']) {
+                    $data['skill-filter'] = explode(',', $data['skill-filter']);
+                }
+                $data['time-filter'] = $orderBy;
+                $offers = $this->getDoctrine()
+                    ->getRepository(Offer::class)
+                    ->getByFilter($data);
+                $offset = (1 === (int) $data['pageNumber']) ? 0 : (int) $data['pageNumber'] * $pagingIndex;
+                $offers = array_slice($offers, $offset, $pagingIndex);
+                $serializer = new Serializer();
+                $jsonContent = $serializer->serialize($offers, 'json');
+            }
+        } catch (Exception $e) {
+        }
+
+        return new Response(json_encode([
+            'type' => 'success',
+            'status' => '200',
+            'message' => 'offer bb',
+        ]));
     }
 }
