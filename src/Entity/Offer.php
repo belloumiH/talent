@@ -200,4 +200,22 @@ class Offer
 
         return $this;
     }
+
+    public function jsonSerialize()
+    {
+        $skillsJson = [];
+        $skills = $this->getSkills();
+        foreach ($skills as $skill) {
+            $skillsJson[] = $skill->getLabel();
+        }
+        $result = [
+            'id' => $this->id,
+            'title' => $this->title,
+            'description' => $this->description,
+            'address' => $this->address,
+            'skills' => $skillsJson,
+        ];
+
+        return $result;
+    }
 }
