@@ -9,19 +9,31 @@ index:
   controller: App\Controller\FrontController::index
   requirements:
     languageUser:  fr|en|ar
+  options:
+    expose: true
 
 offer.information:
   path: /{languageUser}/offer/{offerId}
   controller: App\Controller\FrontController::offer
   requirements:
     languageUser:  fr|en|ar
+  options:
+    expose: true
 
 offer.information.default:
   path: /offer/{offerId}
   controller: App\Controller\FrontController::offer
   defaults:
     languageUser : 'fr'
+  options:
+    expose: true
 
 candidate.insert:
   path: /candidate-insert/{languageUser}
-  controller: App\Controller\FrontController::candidateInsert    
+  controller: App\Controller\FrontController::candidateInsert
+
+get.ajax.offer:
+  path: /get-ajax-offer
+  controller: App\Controller\FrontController::getAjaxOffer
+  options:
+    expose: true
