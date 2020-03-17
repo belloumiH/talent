@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\v1\View;
+namespace App\View;
 
 use App\Entity\Offer;
 
