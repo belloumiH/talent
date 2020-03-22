@@ -7,12 +7,12 @@ use App\Entity\Offer;
 use App\Entity\OfferSkill;
 use App\v1\View\OfferView;
 use Exception;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Yaml\Yaml;
 
-class FrontController extends AbstractController
+class FrontController extends Controller
 {
     /**
      * @return \Symfony\Component\HttpFoundation\Response
@@ -103,24 +103,31 @@ class FrontController extends AbstractController
         if ($request->isMethod('post')) {
             $data = $request->request->all();
             $candidateFile = $request->files->get('candidate-file');
-            $fileName = '';
+            $fileNameAws = null;
             if (null !== $candidateFile) {
                 $fileName = microtime(true).'.'.$candidateFile->guessExtension();
                 try {
                     $candidateFile->move(
                         $this->getParameter('uploads_private_directory'),
-                        $fileName);
+                        $fileName
+                    );
+                    $fileNameAws = $this->get('aws_storage')->uploadFile(
+                        $this->getParameter('uploads_private_directory').'/'.$fileName,
+                        'recrutalent/'
+                    );
+                    unlink($this->getParameter('uploads_private_directory').'/'.$fileName);
                 } catch (Exception $e) {
-                    $fileName = null;
+                    $fileNameAws = null;
                 }
             }
+
             $candidate = new Candidate();
             $candidate->setFirstName((string) $data['your-first-name']);
             $candidate->setLastName((string) $data['your-name']);
             $candidate->setPhone((string) $data['phone']);
             $candidate->setMail((string) $data['your-email']);
             $candidate->setComment((string) $data['message']);
-            $candidate->setFile((string) $fileName);
+            $candidate->setFile((string) $fileNameAws);
             $offer = $this->getDoctrine()
                 ->getRepository(Offer::class)
                 ->find((int) $data['offer-id']);
