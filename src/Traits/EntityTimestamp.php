@@ -25,4 +25,16 @@ trait EntityTimestamp
     {
         return $this->createdAt;
     }
+
+    /**
+     * @param  $createdAt
+     *
+     * @return $this
+     */
+    public function setCreatedAt($createdAt)
+    {
+        $this->createdAt = $createdAt;
+
+        return $this;
+    }
 }

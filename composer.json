@@ -42,7 +42,8 @@
         "symfony/validator": "4.4.*",
         "symfony/var-dumper": "4.4.*",
         "symfony/web-link": "4.4.*",
-        "symfony/yaml": "4.4.*"
+        "symfony/yaml": "4.4.*",
+        "aws/aws-sdk-php": "^3.133"
     },
     "require-dev": {
         "symfony/debug-pack": "*",

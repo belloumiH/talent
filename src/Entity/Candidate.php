@@ -6,6 +6,7 @@ namespace App\Entity;
 
 use App\Helper\Cryptor;
 use App\Traits\EntityIdTrait;
+use App\Traits\EntityTimestamp;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -17,6 +18,7 @@ use Doctrine\ORM\Mapping as ORM;
 class Candidate
 {
     use EntityIdTrait;
+    use EntityTimestamp;
 
     /**
      * @var string|null
@@ -66,6 +68,16 @@ class Candidate
      * @ORM\JoinColumn(name="offer_id", referencedColumnName="id", nullable=true)
      */
     private $offer;
+
+    /**
+     * Candidate constructor.
+     *
+     * @throws \Exception
+     */
+    public function __construct()
+    {
+        $this->setCreatedAt(new \DateTime('NOW'));
+    }
 
     public function getFirstName(): ?string
     {
